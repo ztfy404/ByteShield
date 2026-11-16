@@ -36,7 +36,11 @@ python3 app.py
 
 ## Версия для Windows без Python
 
-Сборка `ByteShield.exe` запускается в [GitHub Actions](https://github.com/ztfy404/ByteShield/actions). После успешной сборки откройте запуск **Tests and Windows build** и скачайте артефакт **ByteShield-Windows**. В `.exe` входит интерфейс и встроенный сканер; ClamAV устанавливается отдельно.
+**[Скачать ByteShield.exe](https://github.com/ztfy404/ByteShield/releases/download/v0.1.0/ByteShield.exe)** · [Релиз и SHA-256](https://github.com/ztfy404/ByteShield/releases/tag/v0.1.0)
+
+В `.exe` входит интерфейс и встроенный сканер; Python отдельно не нужен. ClamAV устанавливается отдельно. Сборка выполнена в GitHub Actions на Windows; интерактивный запуск `.exe` на Windows пока не проверялся. Окно и его основные действия проверены на Linux.
+
+Для следующих версий остаются автоматическая сборка **Tests and Windows build** и ручная публикация **Publish Windows release** в [GitHub Actions](https://github.com/ztfy404/ByteShield/actions).
 
 ## Проверка из терминала
 
