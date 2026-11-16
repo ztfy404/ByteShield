@@ -1,0 +1,39 @@
+name: Publish Windows release
+on:
+  workflow_dispatch:
+    inputs:
+      run_id:
+        description: Successful Windows build run ID
+        required: true
+        default: '43962371410'
+      version:
+        description: Release tag
+        required: true
+        default: 'v0.1.0'
+      commit:
+        description: Commit used for the Windows build
+        required: true
+        default: '7b1fcf23005c304030e6d33839d71a86c9551267'
+permissions:
+  contents: write
+  actions: read
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: ByteShield-Windows
+          path: dist
+          run-id: ${{ inputs.run_id }}
+          github-token: ${{ github.token }}
+      - name: Publish executable and checksum
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+          TAG: ${{ inputs.version }}
+          COMMIT: ${{ inputs.commit }}
+        run: |
+          cd dist
+          sha256sum ByteShield.exe > ByteShield.exe.sha256
+          gh release create "$TAG" ByteShield.exe ByteShield.exe.sha256 --repo "$REPO" --target "$COMMIT" --title "ByteShield $TAG" --prerelease --notes "Первая версия: окно, проверка файлов и папок, SHA-256/EICAR, карантин, восстановление и JSON-отчёт. ClamAV и его базы устанавливаются отдельно. Без ClamAV база только тестовая. Проверка выполняется по запросу, защиты в реальном времени нет. Локальные тесты и сборка Windows прошли; интерактивный запуск exe на Windows пока не проверялся."
