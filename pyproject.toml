@@ -1,0 +1,20 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "byteshield-av"
+version = "0.1.0"
+description = "ByteShield: a local on-demand antivirus scanner with a desktop UI"
+requires-python = ">=3.10"
+dependencies = []
+
+[project.scripts]
+byteshield = "byteshield.cli:main"
+byteshield-gui = "byteshield.gui:main"
+
+[tool.setuptools.packages.find]
+include = ["byteshield*"]
+
+[tool.setuptools.package-data]
+byteshield = ["data/*.json"]
